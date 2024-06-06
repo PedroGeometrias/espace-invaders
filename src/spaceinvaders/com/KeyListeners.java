@@ -28,7 +28,6 @@ public class KeyListeners implements KeyListener{
 		if (key == KeyEvent.VK_H) {
 			nave.setAbscissas(nave.getAbscissas() - Data.VELOCIDADE); // h move pra esquerda 
         }
-		
 	}
 
 	@Override

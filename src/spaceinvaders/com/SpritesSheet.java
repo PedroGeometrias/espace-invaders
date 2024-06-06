@@ -24,7 +24,7 @@ public class SpritesSheet extends JPanel {
     // esse método é bem simples de entender, eu retorno um objeto, dw cuja o nome eu especifico dps, que tem as propriedades passadas nos parametros !
     public Sprite criarSprite(int abscissas, int ordenadas, int largura, int altura, int scale) {
         return new Sprite(image, abscissas, ordenadas, largura, altura, scale);
-    } 
+    }
     
 }
 

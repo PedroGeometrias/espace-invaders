@@ -36,8 +36,11 @@ public class Drawing extends JPanel {
             Image image = sprite.getImg();
             if (image != null) {
                 g2d.drawImage(image,
-                    sprite.getAbscissas(), sprite.getOrdenadas(), sprite.getAbscissas() + sprite.getScaledWidth(), sprite.getOrdenadas() + sprite.getScaledHeight(),
-                    0, 0, sprite.getLargura(), sprite.getAltura(),
+                		sprite.getAbscissas(), 
+                        sprite.getOrdenadas(), 
+                        sprite.getAbscissas() + sprite.getScaledWidth(),
+                        sprite.getOrdenadas() + sprite.getScaledHeight(),
+                        0, 0, sprite.getLargura(), sprite.getAltura(),
                     this);
             }
         }

@@ -50,6 +50,13 @@ public class Main extends JFrame{
 	    // criando os sprites
 		SpritesSheet sprites = new SpritesSheet("assets/art/navesBasico.png");
 		Sprite nave = sprites.criarSprite(0, 0, 16, 16, 2);
+		
+		// setando posicao inicial do player como a mais em baixo e no centro
+		int initialX = (Data.WIDTH * Data.SCALE - nave.getScaledWidth()) / 2;
+	    int initialY = Data.HEIGHT * Data.SCALE - nave.getScaledHeight() - 24; // esse numero ai veio mais por tentativa e erro
+	    nave.setAbscissas(initialX);
+	    nave.setOrdenadas(initialY);
+
 		// criando meu objeto que representa os controles
 		KeyListeners controles = new KeyListeners(nave);
 		
