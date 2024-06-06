@@ -29,24 +29,17 @@ public class Drawing extends JPanel {
     // bem padrao pra varios jgs, esse é o metodo que realmente desenha na tela
     @Override
     protected void paintComponent(Graphics g) {
-
-    	// chamando o paintComponent da super classe
         super.paintComponent(g);
-
-        // convertendo g para o contexto de Graficos 2d, bem simples 
         Graphics2D g2d = (Graphics2D) g;
-        
-        // um fir each que navega pela minha lista desenhando as imagens especificadas pelos paramentros
+
         for (Sprite sprite : sprites) {
             Image image = sprite.getImg();
             if (image != null) {
                 g2d.drawImage(image,
-                    0, 0, sprite.getScaledWidth(), sprite.getScaledHeight(),
-                    sprite.getAbscissas(), sprite.getOrdenadas(), sprite.getAbscissas() + sprite.getLargura(), sprite.getOrdenadas() + sprite.getAltura(),
+                    sprite.getAbscissas(), sprite.getOrdenadas(), sprite.getAbscissas() + sprite.getScaledWidth(), sprite.getOrdenadas() + sprite.getScaledHeight(),
+                    0, 0, sprite.getLargura(), sprite.getAltura(),
                     this);
             }
         }
-        // redesenha
-        repaint();
     }
 }

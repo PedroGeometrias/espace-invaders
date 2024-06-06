@@ -8,18 +8,20 @@ public class Sprite {
 	private Image img;
     // tenta imaginar o spritesheet como um plano cartesiano, a gnt vai escolher as cordenadas começando do canto superior esquerdo,
 	// e dps com a largura e altura escolher o quanto a gnt que cortar,  o scale define o tamanho que a imagem vai aparecer na tela
-	private int ordenadas, abscissas, largura, altura, scale; 
+	private int posicaoAtualNoX, posicaoAtualNoY, ordenadas, abscissas, largura, altura, scale; 
 
 	public Sprite(Image img, int abscissas, int ordenadas, int largura, int altura, int scale) { 
 		this.abscissas = abscissas;
 		this.ordenadas = ordenadas;
+		this.posicaoAtualNoX = posicaoAtualNoX;
+		this.posicaoAtualNoY = posicaoAtualNoY;
 		this.largura = largura;
 		this.altura = altura;
 		this.scale = scale;
 		this.img = img;
 	}
 	
-	// setando getters, não botei os setters pq essa classe só vai setar os dados uma vez, quando for instanciada
+	// setando getters e setters 
 	public Image getImg() {
 		return img;
 	}
@@ -44,6 +46,26 @@ public class Sprite {
 	public int getScale() {
 		return scale;
 	}
+	
+	public int getPosicaoAtualNoX() {
+		posicaoAtualNoX = abscissas;
+		return posicaoAtualNoX;
+	}
+
+	public void setPosicaoAtualNoX(int posicaoAtualNoX) {
+		this.posicaoAtualNoX = getAbscissas();
+	}
+
+	// esses dois são responsáveis por atualizar a posição do player
+	public void setOrdenadas(int ordenadas) {
+        this.ordenadas = ordenadas;
+    }
+
+    public void setAbscissas(int abscissas) {
+        this.abscissas = abscissas;
+    }
+    
+    
 
 	// esses dois caras são bem importantas na hora de renderizar o sprite na tela com o tamanho que a gnt vai querer
 	public int getScaledWidth() {
