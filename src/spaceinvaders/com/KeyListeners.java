@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyListeners implements KeyListener{
-   // esse é o cara onde a gnt seta os controles
+// esse é o cara onde a gnt seta os controles
 	private Sprite nave;
 	
 	public KeyListeners(Sprite nave) {
@@ -23,10 +23,10 @@ public class KeyListeners implements KeyListener{
 		
 		// mover pra direita e esquerda é igual o nvim
 		if(key == KeyEvent.VK_L) {
-			nave.setAbscissas(nave.getAbscissas() + 5); // l move pra direita
+			nave.setAbscissas(nave.getAbscissas() + Data.VELOCIDADE); // l move pra direita
 		}
 		if (key == KeyEvent.VK_H) {
-			nave.setAbscissas(nave.getAbscissas() - 5); // h move pra esquerda 
+			nave.setAbscissas(nave.getAbscissas() - Data.VELOCIDADE); // h move pra esquerda 
         }
 		
 	}

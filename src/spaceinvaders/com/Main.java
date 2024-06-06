@@ -37,6 +37,7 @@ public class Main extends JFrame{
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
+
 		Main game = new Main(frame);
 		
 		// aqui estou setando o titulo por enquanto, mas dps vou substituir pelo fps do jg
@@ -59,6 +60,7 @@ public class Main extends JFrame{
         frame.pack();
         frame.setVisible(true);
 
+        // game loop basico estremamente basico
         while(true) {
         	graphics.repaint();
         	try {
