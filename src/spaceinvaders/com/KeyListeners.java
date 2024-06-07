@@ -23,10 +23,10 @@ public class KeyListeners implements KeyListener{
 		
 		// mover pra direita e esquerda é igual o nvim
 		if(key == KeyEvent.VK_L) {
-			nave.setAbscissas(nave.getAbscissas() + Data.VELOCIDADE); // l move pra direita
+			nave.setAbscissas(nave.getAbscissas() + Data.VELOCIDADE_INICIAL); // l move pra direita
 		}
 		if (key == KeyEvent.VK_H) {
-			nave.setAbscissas(nave.getAbscissas() - Data.VELOCIDADE); // h move pra esquerda 
+			nave.setAbscissas(nave.getAbscissas() - Data.VELOCIDADE_INICIAL); // h move pra esquerda 
         }
 	}
 

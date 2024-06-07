@@ -4,10 +4,10 @@ public interface Data {
 	// esse arquivo tem dados basicos que serao usados no jogo
 	
 	// atributos da tela
-	int WIDTH = 100;
-	int HEIGHT = 100;
-	int SCALE = 7;
+	final int WIDTH = 100;
+	final int HEIGHT = 100;
+	final int SCALE = 7;
 	
 	// atributos do jogador
-	short VELOCIDADE = 5;
+	final short VELOCIDADE_INICIAL = 5;
 }
