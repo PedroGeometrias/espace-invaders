@@ -1,84 +1,89 @@
 package spaceinvaders.com;
 
 import java.awt.Dimension;
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.JLabel;
 
-public class Main extends JFrame{
+public class Main extends JFrame {
 	
-	private static final long serialVersionUID = 1L;
+	// dei uma fatorada nessa classe, ta muito mais organizada
+    private static final long serialVersionUID = 1L;
+    
+    // alguns objteos que são visiveis a toda a classe
+    Drawing graphics;
+    SpritesSheet sprites;
+    Sprite nave;
+    KeyListeners controles;
 
-	public Main(JFrame frame, Drawing graphics, Sprite nave, KeyListeners controles) {
+    public Main() {
+    	// instanciando esses objetos que devem ser visiveis a toda a classe
+        graphics = new Drawing();
+        sprites = new SpritesSheet("assets/art/navesBasico.png");
+        nave = sprites.criarSprite(0, 0, 16, 16, 2);
+        controles = new KeyListeners(nave);
+    }
 
-		// setando o tamanho da janela do jogo
-		frame.setSize(new Dimension(Data.WIDTH * Data.SCALE, Data.HEIGHT * Data.SCALE));
+    // método que inicializa a janela
+    private void setGameFrame() {
+    	// declarando algumas configurações da janela do jogo
+        setSize(new Dimension(Data.WIDTH * Data.SCALE, Data.HEIGHT * Data.SCALE));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Space Invaders");
+        setVisible(true);
+        
+        // desenhando na tela do jogo inteira
+        graphics.setPreferredSize(new Dimension(Data.WIDTH * Data.SCALE, Data.HEIGHT * Data.SCALE));
 
-		// operação de fechamento fecha de verdade a janela
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		// pra deixar a janela no centro da tela
-		frame.setLocationRelativeTo(null);
-		JPanel panel = new JPanel();
+        // setando a posicao inicial do jogador
+        int initialX = (Data.WIDTH * Data.SCALE - nave.getScaledWidth()) / 2;
+        int initialY = Data.HEIGHT * Data.SCALE - nave.getScaledHeight() - 24;
+        nave.setAbscissas(initialX);
+        nave.setOrdenadas(initialY);
+        
+        // janela agora aceita controles
+        addKeyListener(controles);
+        
+        //adicionando o sprite da nave (player) na lista de sprite disponiveis
+        graphics.addSprite(nave);
 
-		// seta o container primario como o painel
-	    frame.setContentPane(panel);
+        // adicionando a abilidade de desenhar na tela do jogo
+        add(graphics);
+        
+        // pack ajusta o tamanho da janela ao "preferredSize" e aos componentes junto com seus layouts
+        pack();
+        
+    }
 
-	    // janela fica visivel
-	    frame.setVisible(true);
-	    
-	    // user n pode modificar o tamanho ( não mudar pois pode causar bugs visuais)
-		frame.setResizable(false);
-		
-		setFrame(frame, graphics ,nave ,controles);
-		
+    // setando o menu, a configuracao dele e de seus componentes tem de ser feita na classe "Menu"
+    private void setMenuFrame() {
+    	// criando um objeto da classe menu, para poder setar paramentros e aspectos dos componentes criados e configurados na
+    	// classe menu
+        Menu menu = new Menu();
+        JLabel titleOfMenu = menu.createTitle("Space Invaders");
+        JButton buttonOfStart = menu.createButtonOfStart("New Game");
+        
+        // quando o botão de start for clicado, a janela do jogo vai abrir, eu pesquisei e a gnt podia usar um CardPanel, mas
+        // to com preguica
+        buttonOfStart.addActionListener(e -> {
+            setGameFrame();
+            menu.dispose();
+        });
+    }
 
-	}
-	
-	private void setFrame(JFrame frame, Drawing graphics, Sprite nave, KeyListeners controles){
-			// aqui estou setando o titulo por enquanto, mas dps vou substituir pelo fps do jg
-		frame.setTitle("Space Invaders");
-		graphics.setPreferredSize(new Dimension(Data.WIDTH* Data.SCALE, Data.HEIGHT * Data.SCALE));
-		
-		// setando posicao inicial do player como a mais em baixo e no centro
-		int initialX = (Data.WIDTH * Data.SCALE - nave.getScaledWidth()) / 2;
-	    int initialY = Data.HEIGHT * Data.SCALE - nave.getScaledHeight() - 24; // esse numero ai veio mais por tentativa e erro
-			nave.setAbscissas(initialX);
-			nave.setOrdenadas(initialY);
-			frame.addKeyListener(controles);
-		graphics.addSprite(nave);
+    public static void main(String[] args) {
+        Main main = new Main();
+        main.setMenuFrame();
 
-        frame.add(graphics);
-        frame.pack();
-        frame.setVisible(true);
-
-	}
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-
-		// classe que desenha os graficos
-		Drawing graphics = new Drawing();
-
-	    // criando os sprites
-		SpritesSheet sprites = new SpritesSheet("assets/art/navesBasico.png");
-		Sprite nave = sprites.criarSprite(0, 0, 16, 16, 2);
-
-		// criando meu objeto que representa os controles
-		KeyListeners controles = new KeyListeners(nave);
-		
-		Menu m = new Menu(frame);
-
-		m.buttons(frame, graphics, nave, controles);
-
-        // game loop basico estremamente basico
-        while(true) {
-        	graphics.repaint();
-        	try {
-				Thread.sleep(16);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        while (true) {
+            main.graphics.repaint();
+            try {
+                Thread.sleep(16);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-	}
+    }
 }

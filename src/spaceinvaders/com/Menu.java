@@ -6,54 +6,40 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class Menu extends JFrame {
-    final int WIDTH = 200;
-    final int HEIGHT = 200;
-    JFrame frame;
+    private static final long serialVersionUID = 1L;
 
-    // construtor da classe Menu
-    public Menu(JFrame frame) {
-        this.frame = frame;
-        setTitle("Space Invaders"); 
-
-        setSize(new Dimension(800, 600)); // define o tamanho da janela
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-        
-        setLocationRelativeTo(null); 
-        setResizable(false); 
-        
-        getContentPane().setBackground(Color.BLACK); // define a cor de fundo da janela
-
-        setLayout(new FlowLayout()); // define o layout como FlowLayout, que basicamente é como os elementos da jenela tem de se comportar 
-
-        title(); // chama o método para adicionar o title, que deve ser chamado automaticamentegT 
-
-        setVisible(true); // torna a janela visível
+    // configuração basica da janela do menu
+    public Menu() {
+        setTitle("Space Invaders");
+        setSize(new Dimension(800, 600));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        getContentPane().setBackground(Color.BLACK);
+        setLayout(new FlowLayout());
+        setVisible(true);
     }
 
-    // método que adiciona o título
-    private void title() {
-        JLabel title = new JLabel("Space Invaders");
-        title.setFont(getFont());
-        title.setForeground(Color.green);
-        this.add(title);
+    // quando for criar mais componentes, siga essa lógica, crie eles aqui, chame esse método lá na Main.setMenu(), fica muito 
+    // mais modular
+    
+    
+    // método que cria e configura o titulo do jogo
+    public JLabel createTitle(String title) {
+        JLabel label = new JLabel(title);
+        label.setFont(getFont());
+        label.setForeground(Color.green);
+        add(label);
+        return label;
     }
 
-    // método que adiciona os botões
-    public void buttons(JFrame f, Drawing graphics, Sprite nave, KeyListeners controles) {
-        JButton start = new JButton("Start");
+    // método que cria e configura o botao de novo jogo (ou qualquer outra String que vcs preferirem)
+    public JButton createButtonOfStart(String text) {
+        JButton start = new JButton(text);
         start.setPreferredSize(new Dimension(100, 50));
-        start.addActionListener(e -> {
-            new Main(f, graphics, nave, controles);
-            this.dispose();
-        });
-        this.add(start);
-    }
-
-    // método para criar um novo JFrame
-    public JFrame createFrame() {
-        return new JFrame();
+        add(start);
+        return start;
     }
 }
