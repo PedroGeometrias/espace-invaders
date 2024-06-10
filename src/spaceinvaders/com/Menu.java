@@ -22,8 +22,8 @@ public class Menu extends JFrame {
         setVisible(true);
     }
 
-    // quando for criar mais componentes, siga essa lógica, crie eles aqui, chame esse método lá na Main.setMenu(), fica muito 
-    // mais modular
+    // Vitor quando for criar mais componentes, siga essa lógica, crie eles aqui, chame esse método lá na Main.setMenu(), fica muito 
+    // mais organizado
     
     
     // método que cria e configura o titulo do jogo
