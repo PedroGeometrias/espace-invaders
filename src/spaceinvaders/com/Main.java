@@ -31,6 +31,7 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+        // no futuro a gnt pode usar o titulo pra mostrar o fps
         setTitle("Space Invaders");
         setVisible(true);
         
