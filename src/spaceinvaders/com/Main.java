@@ -14,6 +14,8 @@ public class Main extends JFrame {
     Drawing graphics;
     SpritesSheet sprites;
     Sprite nave;
+    Sprite alien;
+    Sprite alien1;
     KeyListeners controles;
 
     public Main() {
@@ -21,6 +23,8 @@ public class Main extends JFrame {
         graphics = new Drawing();
         sprites = new SpritesSheet("assets/art/navesBasico.png");
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
+alien = sprites.criarSprite(0, 16, 16, 16, 2);
+alien1 = sprites.criarSprite(0, 16, 16, 16, 2);
         controles = new KeyListeners(nave);
     }
 
@@ -31,7 +35,6 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
-        // no futuro a gnt pode usar o titulo pra mostrar o fps
         setTitle("Space Invaders");
         setVisible(true);
         
@@ -47,9 +50,15 @@ public class Main extends JFrame {
         // janela agora aceita controles
         addKeyListener(controles);
         
+        alien.setAbscissas(0);
+        alien.setOrdenadas(0);
+        
+        alien1.setAbscissas(49);
+        alien1.setOrdenadas(0);
         //adicionando o sprite da nave (player) na lista de sprite disponiveis
+        graphics.addSprite(alien1);
         graphics.addSprite(nave);
-
+        graphics.addSprite(alien);
         // adicionando a abilidade de desenhar na tela do jogo
         add(graphics);
         

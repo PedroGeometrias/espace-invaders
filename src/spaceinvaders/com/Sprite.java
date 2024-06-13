@@ -1,16 +1,17 @@
 package spaceinvaders.com;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class Sprite {
 	// essa classe representa um sprite, e sua propriedaades
 	// esse cara representa as imagens
-	private Image img;
+	private BufferedImage img;
     // tenta imaginar o spritesheet como um plano cartesiano, a gnt vai escolher as cordenadas começando do canto superior esquerdo,
 	// e dps com a largura e altura escolher o quanto a gnt que cortar,  o scale define o tamanho que a imagem vai aparecer na tela
 	private int posicaoAtualNoX, posicaoAtualNoY, ordenadas, abscissas, largura, altura, scale; 
 
-	public Sprite(Image img, int abscissas, int ordenadas, int largura, int altura, int scale) { 
+	public Sprite(BufferedImage img, int abscissas, int ordenadas, int largura, int altura, int scale) { 
 		this.abscissas = abscissas;
 		this.ordenadas = ordenadas;
 		this.posicaoAtualNoX = posicaoAtualNoX;
@@ -22,7 +23,7 @@ public class Sprite {
 	}
 	
 	// setando getters e setters 
-	public Image getImg() {
+	public BufferedImage getImg() {
 		return img;
 	}
 
