@@ -21,7 +21,7 @@ public class Main extends JFrame {
     public Main() {
     	// instanciando esses objetos que devem ser visiveis a toda a classe
         graphics = new Drawing();
-        sprites = new SpritesSheet("assets/art/navesBasico.png");
+        sprites = new SpritesSheet("assets/art/PixelArtSpaceInavader");
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
 alien = sprites.criarSprite(0, 16, 16, 16, 2);
 alien1 = sprites.criarSprite(0, 16, 16, 16, 2);
