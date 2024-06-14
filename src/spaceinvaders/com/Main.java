@@ -23,8 +23,8 @@ public class Main extends JFrame {
         graphics = new Drawing();
         sprites = new SpritesSheet("assets/art/navesBasico.png");
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
-alien = sprites.criarSprite(0, 16, 16, 16, 2);
-alien1 = sprites.criarSprite(0, 16, 16, 16, 2);
+        alien = sprites.criarSprite(0, 16, 16, 16, 2);
+        alien1 = sprites.criarSprite(0, 16, 16, 16, 2);
         controles = new KeyListeners(nave);
     }
 
@@ -49,6 +49,8 @@ alien1 = sprites.criarSprite(0, 16, 16, 16, 2);
         
         // janela agora aceita controles
         addKeyListener(controles);
+        Alien ali = new Alien();
+        ali.alien1();
         
         alien.setAbscissas(0);
         alien.setOrdenadas(0);
@@ -61,10 +63,11 @@ alien1 = sprites.criarSprite(0, 16, 16, 16, 2);
         graphics.addSprite(alien);
         // adicionando a abilidade de desenhar na tela do jogo
         add(graphics);
-        
+        add(ali.alien1);
         // pack ajusta o tamanho da janela ao "preferredSize" e aos componentes junto com seus layouts
         pack();
         
+
     }
 
     // setando o menu, a configuracao dele e de seus componentes tem de ser feita na classe "Menu"
