@@ -1,87 +1,79 @@
 package spaceinvaders.com;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Main extends JFrame {
-	
-	// dei uma fatorada nessa classe, ta muito mais organizada
+
     private static final long serialVersionUID = 1L;
     
-    // alguns objteos que são visiveis a toda a classe
-    Drawing graphics;
-    SpritesSheet sprites;
-    Sprite nave;
-    Sprite alien;
-    Sprite alien1;
-    KeyListeners controles;
+    // criando variaveis aqui para elas serem acessiveis para a classe inteira
+    private Drawing graphics;
+    private SpritesSheet sprites;
+    private Sprite nave;
+    private Alien alien;
+    private KeyListeners controles;
 
     public Main() {
-    	// instanciando esses objetos que devem ser visiveis a toda a classe
+    	// instanciando as variaveis no construtor, estou fazendo isso pois esse é o primeiro método que vai ser chamado por todo mundo
         graphics = new Drawing();
         sprites = new SpritesSheet("assets/art/PixelArtSpaceInavader.png");
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
-        alien = sprites.criarSprite(0, 16, 16, 16, 2);
-        alien1 = sprites.criarSprite(0, 16, 16, 16, 2);
+        
+        alien = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
         controles = new KeyListeners(nave);
     }
 
-    // método que inicializa a janela
+    // janela do jogo do jogo
     private void setGameFrame() {
-    	// declarando algumas configurações da janela do jogo
+    	// propriedaes da janela do jogo
         setSize(new Dimension(Data.WIDTH * Data.SCALE, Data.HEIGHT * Data.SCALE));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setBackground(Color.BLACK);
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Space Invaders");
         setVisible(true);
-        
-        // desenhando na tela do jogo inteira
+
+        // o tamanho do Graphics, que é um componente jpanel tem de ser o mesmo do tamanho da tela do jogo
+        // pois a gnt vai desenhar na tela inteira
         graphics.setPreferredSize(new Dimension(Data.WIDTH * Data.SCALE, Data.HEIGHT * Data.SCALE));
 
-        // setando a posicao inicial do jogador
-        int initialX = (Data.WIDTH * Data.SCALE - nave.getScaledWidth()) / 2;
-        int initialY = Data.HEIGHT * Data.SCALE - nave.getScaledHeight() - 24;
+        // posição inicial do player
+        int initialX = (Data.WIDTH * Data.SCALE - nave.getScaledWidth()) / 2; // nave fica no centro da tela
+        int initialY = Data.HEIGHT * Data.SCALE - nave.getScaledHeight() - 24; // nave fica na parte de baixo somando 24 pixeis ao contrario
+        
+        // aqui eu seto a posi com as variavei de posicçaõ
         nave.setAbscissas(initialX);
         nave.setOrdenadas(initialY);
         
-        // janela agora aceita controles
+        // adiciono os controles setados na classe especifica deles 
         addKeyListener(controles);
-        Alien ali = new Alien();
-        ali.alien1();
         
-        alien.setAbscissas(0);
-        alien.setOrdenadas(0);
-        
-        alien1.setAbscissas(49);
-        alien1.setOrdenadas(0);
-        //adicionando o sprite da nave (player) na lista de sprite disponiveis
-        graphics.addSprite(alien1);
+        // adicion o sprite da nave na arraylist de spritew
         graphics.addSprite(nave);
-        graphics.addSprite(alien);
-        // adicionando a abilidade de desenhar na tela do jogo
-        add(graphics);
-        add(ali.alien1);
-        // pack ajusta o tamanho da janela ao "preferredSize" e aos componentes junto com seus layouts
-        pack();
         
-
+        // adiciono o JPanel dos graficos ao frame
+        add(graphics);
+        
+        // aqui eu modifico o tamanho do frame aos componentes, no caso os graficos
+        pack();
     }
 
-    // setando o menu, a configuracao dele e de seus componentes tem de ser feita na classe "Menu"
+    // classe que seta e constrói o menu
     private void setMenuFrame() {
-    	// criando um objeto da classe menu, para poder setar paramentros e aspectos dos componentes criados e configurados na
-    	// classe menu
         Menu menu = new Menu();
         JLabel titleOfMenu = menu.createTitle("Space Invaders");
         JButton buttonOfStart = menu.createButtonOfStart("New Game");
-        
-        // quando o botão de start for clicado, a janela do jogo vai abrir, eu pesquisei e a gnt podia usar um CardPanel, mas
-        // to com preguica
+
         buttonOfStart.addActionListener(e -> {
+        	// chamo a janela do jogo ao clicar no botão
             setGameFrame();
+            
+            // discarto a janela do menu
             menu.dispose();
         });
     }

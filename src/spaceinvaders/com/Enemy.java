@@ -2,12 +2,15 @@ package spaceinvaders.com;
 
 public class Enemy  {
     
+	// essa é a classe enemy, vc pode criar um objeto dessa classe em todos os inimigos pra poder 
+	// usar os atributos basicos
     private int vida;
     private int moeda;
     private int dano;
     private float velocidadeTiro;
     
     public Enemy(){
+    	// por ser uma interface, a gnt tem que igualar as variaveis constantes a variaves que a gnt pode mudar
         this.vida = Data.VIDA_INICIAL;
         this.moeda = Data.QUANTIDADE_MOEDAS_DROP_ALIEN;
         this.velocidadeTiro = Data.VELOCIDADE_TIROS_SEG_INICIAL;
@@ -15,6 +18,9 @@ public class Enemy  {
 
     }
 
+    
+    // getters e setters:
+    
     public int getVida() {
         return vida;
     }
