@@ -24,7 +24,7 @@ public class Main extends JFrame {
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
         
         alien = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
-        controles = new KeyListeners(nave);
+        controles = new KeyListeners(nave, graphics);
     }
 
     // janela do jogo do jogo

@@ -1,14 +1,17 @@
 package spaceinvaders.com;
 
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyListeners implements KeyListener{
 // esse é o cara onde a gnt seta os controles
 	private Sprite nave;
+	private Drawing graphics;
 	
-	public KeyListeners(Sprite nave) {
+	public KeyListeners(Sprite nave, Drawing graphics) {
 		this.nave = nave;
+		this.graphics = graphics;
 	}
 	
 	@Override
@@ -27,6 +30,13 @@ public class KeyListeners implements KeyListener{
 		}
 		if (key == KeyEvent.VK_H) {
 			nave.setAbscissas(nave.getAbscissas() - Data.VELOCIDADE_INICIAL); // h move pra esquerda 
+        }
+		if (key == KeyEvent.VK_SPACE) {
+            Shot tiro = new Shot(nave.getAbscissas(), nave.getOrdenadas(), 8);
+            //new Thread(() -> {
+                Graphics2D g2d = (Graphics2D) graphics.getGraphics();
+                tiro.atirar(g2d);
+            //}).start();
         }
 	}
 
