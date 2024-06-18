@@ -71,53 +71,63 @@ public class Main extends JFrame {
         int ordenadas = 0;
 
         Random rand = new Random();
+        int randAlien = rand.nextInt(11);
         
-        for(int y = 0; y < 1; y++ ){
-            for(int x = 0; x < numeroAliens; x++){
+        if(randAlien == 0){
+            Alien boss = new Alien(sprites, graphics, 16, 16, 80, 80, 2);
+            boss.setAbscissas(initialX - 63);
+            boss.setOrdenadas(10);
+            graphics.addSprite(boss);
+        } 
+        else {
+            for(int y = 0; y < 1; y++ ){
+                for(int x = 0; x < numeroAliens; x++){
 
-                int randAlien = rand.nextInt(4);
-                int i, j;
+                    randAlien = rand.nextInt(4);
+                    int i, j;
 
-                switch (randAlien) {
-                    case 0:
-                        Alien alienVermelho = new Alien(sprites, graphics, 0, 32, 16, 16, 2);
-                        i = y * (espacoAliens + alturaAliens);
-                        j = x * (espacoAliens + larguraAliens);
-                        alienVermelho.setAbscissas(j);
-                        alienVermelho.setOrdenadas(i);
-                        
-                        graphics.addSprite(alienVermelho);
-                        break;
 
-                    case 1:
-                        Alien alienVerde = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
-                        i = y * (espacoAliens + alturaAliens);
-                        j = x * (espacoAliens + larguraAliens);
-                        alienVerde.setAbscissas(j);
-                        alienVerde.setOrdenadas(i);
-                        
-                        graphics.addSprite(alienVerde);
-                        break;
+                        switch (randAlien) {
+                            case 0:
+                                Alien alienVermelho = new Alien(sprites, graphics, 0, 32, 16, 16, 2);
+                                i = y * (espacoAliens + alturaAliens);
+                                j = x * (espacoAliens + larguraAliens);
+                                alienVermelho.setAbscissas(j);
+                                alienVermelho.setOrdenadas(i);
+                                
+                                graphics.addSprite(alienVermelho);
+                                break;
 
-                    case 2:
-                        Alien alienAzul = new Alien(sprites, graphics, 0, 48, 16, 16, 2);
-                        i = y * (espacoAliens + alturaAliens);
-                        j = x * (espacoAliens + larguraAliens);
-                        alienAzul.setAbscissas(j);
-                        alienAzul.setOrdenadas(i);
-                        
-                        graphics.addSprite(alienAzul);
-                        break;
+                            case 1:
+                                Alien alienVerde = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
+                                i = y * (espacoAliens + alturaAliens);
+                                j = x * (espacoAliens + larguraAliens);
+                                alienVerde.setAbscissas(j);
+                                alienVerde.setOrdenadas(i);
+                                
+                                graphics.addSprite(alienVerde);
+                                break;
 
-                    case 3:
-                        Alien alienRosa = new Alien(sprites, graphics, 0, 64, 16, 16, 2);
-                        i = y * (espacoAliens + alturaAliens);
-                        j = x * (espacoAliens + larguraAliens);
-                        alienRosa.setAbscissas(j);
-                        alienRosa.setOrdenadas(i);
-                        
-                        graphics.addSprite(alienRosa);
-                        break;
+                            case 2:
+                                Alien alienAzul = new Alien(sprites, graphics, 0, 48, 16, 16, 2);
+                                i = y * (espacoAliens + alturaAliens);
+                                j = x * (espacoAliens + larguraAliens);
+                                alienAzul.setAbscissas(j);
+                                alienAzul.setOrdenadas(i);
+                                
+                                graphics.addSprite(alienAzul);
+                                break;
+
+                            case 3:
+                                Alien alienRosa = new Alien(sprites, graphics, 0, 64, 16, 16, 2);
+                                i = y * (espacoAliens + alturaAliens);
+                                j = x * (espacoAliens + larguraAliens);
+                                alienRosa.setAbscissas(j);
+                                alienRosa.setOrdenadas(i);
+                                
+                                graphics.addSprite(alienRosa);
+                                break;
+                    }
                 }
             }
         }
