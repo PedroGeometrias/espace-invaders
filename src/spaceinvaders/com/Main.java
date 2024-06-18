@@ -2,6 +2,8 @@ package spaceinvaders.com;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +16,7 @@ public class Main extends JFrame {
     private Drawing graphics;
     private SpritesSheet sprites;
     private Sprite nave;
-    private Alien alien;
+    private ArrayList<Alien> aliens;
     private KeyListeners controles;
 
     public Main() {
@@ -23,7 +25,8 @@ public class Main extends JFrame {
         sprites = new SpritesSheet("assets/art/PixelArtSpaceInavader.png");
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
         
-        alien = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
+
+        
         controles = new KeyListeners(nave);
     }
 
@@ -38,6 +41,8 @@ public class Main extends JFrame {
         setTitle("Space Invaders");
         setVisible(true);
 
+
+
         // o tamanho do Graphics, que é um componente jpanel tem de ser o mesmo do tamanho da tela do jogo
         // pois a gnt vai desenhar na tela inteira
         graphics.setPreferredSize(new Dimension(Data.WIDTH * Data.SCALE, Data.HEIGHT * Data.SCALE));
@@ -46,10 +51,34 @@ public class Main extends JFrame {
         int initialX = (Data.WIDTH * Data.SCALE - nave.getScaledWidth()) / 2; // nave fica no centro da tela
         int initialY = Data.HEIGHT * Data.SCALE - nave.getScaledHeight() - 24; // nave fica na parte de baixo somando 24 pixeis ao contrario
         
-        // aqui eu seto a posi com as variavei de posicçaõ
-        nave.setAbscissas(initialX);
-        nave.setOrdenadas(initialY);
+         // aqui eu seto a posi com as variavei de posicçaõ
+         nave.setAbscissas(initialX);
+         nave.setOrdenadas(initialY);
         
+        aliens = new ArrayList<>();
+        Alien alienT =  new Alien(sprites, graphics, 0, 16, 16, 16, 2);
+        int larguraAliens = alienT.getScaledWidth();
+        int alturaAliens = alienT.getScaledHeight();
+        int espacoAliens = 20;
+        int numeroAliens = 10;
+        int ordenadas = 0;
+        
+        
+        for(int y = 0; y < 1; y++ ){
+            for(int x = 0; x < numeroAliens; x++){
+                
+                Alien alienVermelho = new Alien(sprites, graphics, 0, 32, 16, 16, 2);
+                Alien alienV = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
+                int i = y * (espacoAliens + alturaAliens);
+                int j = x * (espacoAliens + larguraAliens);
+                alienV.setAbscissas(j);
+                alienV.setOrdenadas(i);
+                
+                graphics.addSprite(alienV);
+            }
+        }
+        
+      
         // adiciono os controles setados na classe especifica deles 
         addKeyListener(controles);
         
