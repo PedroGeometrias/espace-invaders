@@ -3,6 +3,7 @@ package spaceinvaders.com;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +18,7 @@ public class Main extends JFrame {
     private SpritesSheet sprites;
     private Sprite nave;
     private Sprite tiro;
+    private Sprite tiroAlien;
     private ArrayList<Alien> aliens;
     private KeyListeners controles;
 
@@ -26,6 +28,7 @@ public class Main extends JFrame {
         sprites = new SpritesSheet("assets/art/PixelArtSpaceInavader.png");
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
         tiro = sprites.criarSprite(0, 176, 16, 16, 1);
+        tiroAlien = sprites.criarSprite(16, 176, 16, 16, 1);
         //alien = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
         controles = new KeyListeners(nave, tiro);
     }
@@ -66,19 +69,56 @@ public class Main extends JFrame {
         int espacoAliens = 20;
         int numeroAliens = 10;
         int ordenadas = 0;
-        
+
+        Random rand = new Random();
         
         for(int y = 0; y < 1; y++ ){
             for(int x = 0; x < numeroAliens; x++){
-                
-                Alien alienVermelho = new Alien(sprites, graphics, 0, 32, 16, 16, 2);
-                Alien alienV = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
-                int i = y * (espacoAliens + alturaAliens);
-                int j = x * (espacoAliens + larguraAliens);
-                alienV.setAbscissas(j);
-                alienV.setOrdenadas(i);
-                
-                graphics.addSprite(alienV);
+
+                int randAlien = rand.nextInt(4);
+                int i, j;
+
+                switch (randAlien) {
+                    case 0:
+                        Alien alienVermelho = new Alien(sprites, graphics, 0, 32, 16, 16, 2);
+                        i = y * (espacoAliens + alturaAliens);
+                        j = x * (espacoAliens + larguraAliens);
+                        alienVermelho.setAbscissas(j);
+                        alienVermelho.setOrdenadas(i);
+                        
+                        graphics.addSprite(alienVermelho);
+                        break;
+
+                    case 1:
+                        Alien alienVerde = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
+                        i = y * (espacoAliens + alturaAliens);
+                        j = x * (espacoAliens + larguraAliens);
+                        alienVerde.setAbscissas(j);
+                        alienVerde.setOrdenadas(i);
+                        
+                        graphics.addSprite(alienVerde);
+                        break;
+
+                    case 2:
+                        Alien alienAzul = new Alien(sprites, graphics, 0, 48, 16, 16, 2);
+                        i = y * (espacoAliens + alturaAliens);
+                        j = x * (espacoAliens + larguraAliens);
+                        alienAzul.setAbscissas(j);
+                        alienAzul.setOrdenadas(i);
+                        
+                        graphics.addSprite(alienAzul);
+                        break;
+
+                    case 3:
+                        Alien alienRosa = new Alien(sprites, graphics, 0, 64, 16, 16, 2);
+                        i = y * (espacoAliens + alturaAliens);
+                        j = x * (espacoAliens + larguraAliens);
+                        alienRosa.setAbscissas(j);
+                        alienRosa.setOrdenadas(i);
+                        
+                        graphics.addSprite(alienRosa);
+                        break;
+                }
             }
         }
         

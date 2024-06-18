@@ -35,7 +35,7 @@ public class KeyListeners implements KeyListener{
 				new Thread(() -> {   
 				tiro.setAbscissas(nave.getAbscissas()+9);   
 				while (tiro.getOrdenadas() > 0) {
-					tiro.setOrdenadas(tiro.getOrdenadas() - 8);
+					tiro.setOrdenadas(tiro.getOrdenadas() - Data.VELOCIDADE_TIROS_SEG_INICIAL);
 					try {
 						Thread.sleep(50);
 					} catch (InterruptedException i) {
