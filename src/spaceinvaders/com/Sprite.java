@@ -47,6 +47,10 @@ public class Sprite {
 	public int getScale() {
 		return scale;
 	}
+
+	public void setScale(int scale) {
+		this.scale = scale;
+	}
 	
 	public int getPosicaoAtualNoX() {
 		posicaoAtualNoX = abscissas;

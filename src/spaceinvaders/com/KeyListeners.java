@@ -33,16 +33,16 @@ public class KeyListeners implements KeyListener{
 		if (key == KeyEvent.VK_SPACE) {
             if(tiro.getOrdenadas() == nave.getOrdenadas()){
 				new Thread(() -> {   
-				tiro.setAbscissas(nave.getAbscissas()+9);   
-				while (tiro.getOrdenadas() > 0) {
-					tiro.setOrdenadas(tiro.getOrdenadas() - Data.VELOCIDADE_TIROS_SEG_INICIAL);
-					try {
-						Thread.sleep(50);
-					} catch (InterruptedException i) {
-						i.printStackTrace();
+					tiro.setAbscissas(nave.getAbscissas()+9);   
+					while (tiro.getOrdenadas() > 0) {
+						tiro.setOrdenadas(tiro.getOrdenadas() - Data.VELOCIDADE_TIROS_SEG_INICIAL);
+						try {
+							Thread.sleep(50);
+						} catch (InterruptedException i) {
+							i.printStackTrace();
+						}
 					}
-				}
-				tiro.setOrdenadas(nave.getOrdenadas());
+					tiro.setOrdenadas(nave.getOrdenadas());
 				}).start();
 			}
         }

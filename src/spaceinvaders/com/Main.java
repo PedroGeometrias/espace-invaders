@@ -28,7 +28,7 @@ public class Main extends JFrame {
         sprites = new SpritesSheet("assets/art/PixelArtSpaceInavader.png");
         nave = sprites.criarSprite(0, 0, 16, 16, 2);
         tiro = sprites.criarSprite(0, 176, 16, 16, 1);
-        tiroAlien = sprites.criarSprite(16, 176, 16, 16, 1);
+        
         //alien = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
         controles = new KeyListeners(nave, tiro);
     }
@@ -55,12 +55,12 @@ public class Main extends JFrame {
         int initialX = (Data.WIDTH * Data.SCALE - nave.getScaledWidth()) / 2; // nave fica no centro da tela
         int initialY = Data.HEIGHT * Data.SCALE - nave.getScaledHeight() - 24; // nave fica na parte de baixo somando 24 pixeis ao contrario
         
-         // aqui eu seto a posi com as variavei de posicçaõ
-         nave.setAbscissas(initialX);
-         nave.setOrdenadas(initialY);
+        // aqui eu seto a posi com as variavei de posicçaõ
+        nave.setAbscissas(initialX);
+        nave.setOrdenadas(initialY);
 
-         tiro.setAbscissas(nave.getAbscissas()+9);
-         tiro.setOrdenadas(nave.getOrdenadas());
+        tiro.setAbscissas(nave.getAbscissas()+9);
+        tiro.setOrdenadas(nave.getOrdenadas());
         
         aliens = new ArrayList<>();
         Alien alienT =  new Alien(sprites, graphics, 0, 16, 16, 16, 2);
@@ -71,13 +71,37 @@ public class Main extends JFrame {
         int ordenadas = 0;
 
         Random rand = new Random();
-        int randAlien = rand.nextInt(11);
+        int randAlien = rand.nextInt(2);
         
         if(randAlien == 0){
             Alien boss = new Alien(sprites, graphics, 16, 16, 80, 80, 2);
+            tiroAlien = sprites.criarSprite(16, 176, 16, 16, 3);
+
             boss.setAbscissas(initialX - 63);
             boss.setOrdenadas(10);
+            
+            tiroAlien.setAbscissas(boss.getAbscissas()+56);
+            tiroAlien.setOrdenadas(boss.getOrdenadas()+122);
+            
             graphics.addSprite(boss);
+            graphics.addSprite(tiroAlien);
+
+            if(tiroAlien.getOrdenadas() == boss.getOrdenadas()+122){
+				new Thread(() -> {   
+                    tiroAlien.setAbscissas(boss.getAbscissas()+56); 
+
+				    while (tiroAlien.getOrdenadas() < 500) {
+                        tiroAlien.setOrdenadas(tiroAlien.getOrdenadas() + (Data.VELOCIDADE_TIROS_SEG_INICIAL * 2));
+                        try {
+                            Thread.sleep(50);
+                        } catch (InterruptedException i) {
+                            i.printStackTrace();
+                        }
+                    }
+                    tiroAlien.setOrdenadas(boss.getOrdenadas()+122);
+                    tiroAlien.setScale(0);
+				}).start();
+			}
         } 
         else {
             for(int y = 0; y < 1; y++ ){
@@ -90,47 +114,73 @@ public class Main extends JFrame {
                         switch (randAlien) {
                             case 0:
                                 Alien alienVermelho = new Alien(sprites, graphics, 0, 32, 16, 16, 2);
+                                tiroAlien = sprites.criarSprite(16, 176, 16, 16, 1);
+                                
                                 i = y * (espacoAliens + alturaAliens);
                                 j = x * (espacoAliens + larguraAliens);
                                 alienVermelho.setAbscissas(j);
                                 alienVermelho.setOrdenadas(i);
                                 
+                                tiroAlien.setAbscissas(alienVermelho.getAbscissas()+9);
+                                tiroAlien.setOrdenadas(alienVermelho.getOrdenadas()+16);
+                                
                                 graphics.addSprite(alienVermelho);
+                                graphics.addSprite(tiroAlien);
                                 break;
 
                             case 1:
                                 Alien alienVerde = new Alien(sprites, graphics, 0, 16, 16, 16, 2);
+                                tiroAlien = sprites.criarSprite(16, 176, 16, 16, 1);
+
                                 i = y * (espacoAliens + alturaAliens);
                                 j = x * (espacoAliens + larguraAliens);
                                 alienVerde.setAbscissas(j);
                                 alienVerde.setOrdenadas(i);
                                 
+                                tiroAlien.setAbscissas(alienVerde.getAbscissas()+9);
+                                tiroAlien.setOrdenadas(alienVerde.getOrdenadas()+16);
+                                
                                 graphics.addSprite(alienVerde);
+                                graphics.addSprite(tiroAlien);
                                 break;
 
                             case 2:
                                 Alien alienAzul = new Alien(sprites, graphics, 0, 48, 16, 16, 2);
+                                tiroAlien = sprites.criarSprite(16, 176, 16, 16, 1);
+
                                 i = y * (espacoAliens + alturaAliens);
                                 j = x * (espacoAliens + larguraAliens);
                                 alienAzul.setAbscissas(j);
                                 alienAzul.setOrdenadas(i);
                                 
+                                tiroAlien.setAbscissas(alienAzul.getAbscissas()+9);
+                                tiroAlien.setOrdenadas(alienAzul.getOrdenadas()+16);
+                                
                                 graphics.addSprite(alienAzul);
+                                graphics.addSprite(tiroAlien);
                                 break;
 
                             case 3:
                                 Alien alienRosa = new Alien(sprites, graphics, 0, 64, 16, 16, 2);
+                                tiroAlien = sprites.criarSprite(16, 176, 16, 16, 1);
+
                                 i = y * (espacoAliens + alturaAliens);
                                 j = x * (espacoAliens + larguraAliens);
                                 alienRosa.setAbscissas(j);
                                 alienRosa.setOrdenadas(i);
                                 
+                                tiroAlien.setAbscissas(alienRosa.getAbscissas()+9);
+                                tiroAlien.setOrdenadas(alienRosa.getOrdenadas()+16);
+                                
                                 graphics.addSprite(alienRosa);
+                                graphics.addSprite(tiroAlien);
                                 break;
                     }
                 }
             }
         }
+
+
         
       
         // adiciono os controles setados na classe especifica deles 

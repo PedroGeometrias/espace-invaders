@@ -87,7 +87,7 @@ public class Alien extends Sprite {
         setVida(getVida() + 200);
         setDano(getDano() + 20);
         setMoeda(getMoeda() + 8);
-        setVelocidadeTiro(getVelocidadeTiro()+10);
+        setVelocidadeTiro(getVelocidadeTiro()+8);
     }
  //Boss
     public void alienBoss(){
