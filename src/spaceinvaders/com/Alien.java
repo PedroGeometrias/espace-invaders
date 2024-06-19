@@ -1,6 +1,7 @@
 package spaceinvaders.com;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 // era obrigatorio ter extendido os Sprite, basicamente o erro bobo que eu falei
 public class Alien extends Sprite {
@@ -10,7 +11,7 @@ public class Alien extends Sprite {
     private SpritesSheet sprites;
     private Drawing graph;
    
-
+    ArrayList<Alien> aliens = new ArrayList<>();
     
     public Alien(SpritesSheet sprites, Drawing graph, int abscissas, int ordenadas, int largura, int altura, int scale) {
     	// completando o super (construtor) da classe sprite, passo um bufFerImage no primeiro sprite, que é o subImage da spriteSheet
@@ -61,39 +62,49 @@ public class Alien extends Sprite {
         enemy.setVelocidadeTiro(velocidadeTiro);
     }
   //o mais fraco
-    public void alienVerde(){
-        setVida(getVida() - 50);
-        setDano(getDano() + 10);
-        setMoeda(getMoeda() + 2);
-        setVelocidadeTiro(getVelocidadeTiro()+5);
+    public void alienVerde(Alien alien){
+        alien.setVida(getVida() - 50);
+        alien.setDano(getDano() + 10);
+        alien.setMoeda(getMoeda() + 2);
+        alien.setVelocidadeTiro(getVelocidadeTiro()+5);
     }
   //mais vida menos dano
-    public void alienAzul(){
-        setVida(getVida() + 50);
-        setDano(getDano() + 10);
-        setMoeda(getMoeda() + 4);
-        setVelocidadeTiro(getVelocidadeTiro()+3);
+    public void alienAzul(Alien alien){
+        alien.setVida(getVida() + 50);
+        alien.setDano(getDano() + 10);
+        alien.setMoeda(getMoeda() + 4);
+        alien.setVelocidadeTiro(getVelocidadeTiro()+3);
     }
  //menos vida mais dano
-    public void alienVermelho(){
-        setVida(getVida());
-        setDano(getDano() + 15);
-        setMoeda(getMoeda() + 6);
-        setVelocidadeTiro(getVelocidadeTiro()+5);
+    public void alienVermelho(Alien alien){
+        alien.setVida(getVida());
+        alien.setDano(getDano() + 15);
+        alien.setMoeda(getMoeda() + 6);
+        alien.setVelocidadeTiro(getVelocidadeTiro()+5);
     }
     
  //pica das galaxias
-    public void alienRoxo(){
-        setVida(getVida() + 200);
-        setDano(getDano() + 20);
-        setMoeda(getMoeda() + 8);
-        setVelocidadeTiro(getVelocidadeTiro()+8);
+    public void alienRosa(Alien alien){
+        alien.setVida(getVida() + 200);
+        alien.setDano(getDano() + 20);
+        alien.setMoeda(getMoeda() + 8);
+        alien.setVelocidadeTiro(getVelocidadeTiro()+8);
     }
- //Boss
+ //Boss 
     public void alienBoss(){
         setVida(getVida() + 400);
         setDano(getDano() + 30);
         setMoeda(getMoeda() + 2);
         setVelocidadeTiro(getVelocidadeTiro()+15);
     }
+
+    public void addAlien(Alien alien) {
+        aliens.add(alien);
+    }
+
+    public void alienVida(Alien alien) {
+        alien.setVida(getVida() - Data.DANO_INICIAL);
+    }
 }
+
+

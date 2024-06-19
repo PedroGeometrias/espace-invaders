@@ -7,6 +7,7 @@ public class KeyListeners implements KeyListener{
 // esse é o cara onde a gnt seta os controles
 	private Sprite nave;
 	private Sprite tiro;
+	private Alien aliens;
 	
 	public KeyListeners(Sprite nave, Sprite tiro) {
 		this.nave = nave;
@@ -36,6 +37,9 @@ public class KeyListeners implements KeyListener{
 					tiro.setAbscissas(nave.getAbscissas()+9);   
 					while (tiro.getOrdenadas() > 0) {
 						tiro.setOrdenadas(tiro.getOrdenadas() - Data.VELOCIDADE_TIROS_SEG_INICIAL);
+							
+							//if (tiro.getOrdenadas() == 180) break;
+
 						try {
 							Thread.sleep(50);
 						} catch (InterruptedException i) {

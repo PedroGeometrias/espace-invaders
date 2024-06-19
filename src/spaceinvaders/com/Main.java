@@ -19,6 +19,7 @@ public class Main extends JFrame {
     private Sprite nave;
     private Sprite tiro;
     private Sprite tiroAlien;
+    private Alien alien;
     private ArrayList<Alien> aliens;
     private KeyListeners controles;
 
@@ -82,6 +83,8 @@ public class Main extends JFrame {
             
             tiroAlien.setAbscissas(boss.getAbscissas()+56);
             tiroAlien.setOrdenadas(boss.getOrdenadas()+122);
+
+            aliens.add(boss);
             
             graphics.addSprite(boss);
             graphics.addSprite(tiroAlien);
@@ -92,6 +95,13 @@ public class Main extends JFrame {
 
 				    while (tiroAlien.getOrdenadas() < 500) {
                         tiroAlien.setOrdenadas(tiroAlien.getOrdenadas() + (Data.VELOCIDADE_TIROS_SEG_INICIAL * 2));
+
+                        /*if (tiroAlien.getAbscissas() == nave.getAbscissas()) {
+                            nave.setAbscissas(0);
+                            nave.setOrdenadas(0);
+                            break;
+                        }*/
+
                         try {
                             Thread.sleep(50);
                         } catch (InterruptedException i) {
@@ -123,6 +133,9 @@ public class Main extends JFrame {
                                 
                                 tiroAlien.setAbscissas(alienVermelho.getAbscissas()+9);
                                 tiroAlien.setOrdenadas(alienVermelho.getOrdenadas()+16);
+
+                                aliens.add(alienVermelho);
+                                alien.alienVermelho(alienVermelho);
                                 
                                 graphics.addSprite(alienVermelho);
                                 graphics.addSprite(tiroAlien);
@@ -139,6 +152,9 @@ public class Main extends JFrame {
                                 
                                 tiroAlien.setAbscissas(alienVerde.getAbscissas()+9);
                                 tiroAlien.setOrdenadas(alienVerde.getOrdenadas()+16);
+
+                                aliens.add(alienVerde);
+                                alien.alienVerde(alienVerde);
                                 
                                 graphics.addSprite(alienVerde);
                                 graphics.addSprite(tiroAlien);
@@ -155,6 +171,9 @@ public class Main extends JFrame {
                                 
                                 tiroAlien.setAbscissas(alienAzul.getAbscissas()+9);
                                 tiroAlien.setOrdenadas(alienAzul.getOrdenadas()+16);
+
+                                aliens.add(alienAzul);
+                                alien.alienAzul(alienAzul);
                                 
                                 graphics.addSprite(alienAzul);
                                 graphics.addSprite(tiroAlien);
@@ -172,6 +191,9 @@ public class Main extends JFrame {
                                 tiroAlien.setAbscissas(alienRosa.getAbscissas()+9);
                                 tiroAlien.setOrdenadas(alienRosa.getOrdenadas()+16);
                                 
+                                aliens.add(alienRosa);
+                                alien.alienRosa(alienRosa);
+
                                 graphics.addSprite(alienRosa);
                                 graphics.addSprite(tiroAlien);
                                 break;
