@@ -1,83 +1,93 @@
 package spaceinvaders.com;
 
-import java.awt.Image;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public class Sprite {
-	// essa classe representa um sprite, e sua propriedaades
-	// esse cara representa as imagens
-	private BufferedImage img;
-    // tenta imaginar o spritesheet como um plano cartesiano, a gnt vai escolher as cordenadas começando do canto superior esquerdo,
-	// e dps com a largura e altura escolher o quanto a gnt que cortar,  o scale define o tamanho que a imagem vai aparecer na tela
-	private int posicaoAtualNoX, posicaoAtualNoY, ordenadas, abscissas, largura, altura, scale; 
-
-	public Sprite(BufferedImage img, int abscissas, int ordenadas, int largura, int altura, int scale) { 
-		this.abscissas = abscissas;
-		this.ordenadas = ordenadas;
-		this.posicaoAtualNoX = posicaoAtualNoX;
-		this.posicaoAtualNoY = posicaoAtualNoY;
-		this.largura = largura;
-		this.altura = altura;
-		this.scale = scale;
-		this.img = img;
-	}
+	// essa é a classe mais importante, aqui a gnt define atributo dos sprites, que são buffers
 	
-	// setando getters e setters 
-	public BufferedImage getImg() {
-		return img;
-	}
+	// declaro o objeto da imagem base de todo mundo, que é um buffer
+    private BufferedImage img;
+    
+    // reutilizei os nomes antigos pois já estava no codigo antigo, ou seja vai ser muito mais facil de vcs reutilizarem oq vcs 
+    // ja tinham feito
+    private int ordenadas, abscissas, scale;
+    
+    // declarei booleana para a morte, quem for fazer o player, alien e a bala vai usar esses caras
+    private boolean visible, isDying;
 
+    // escala inicial é setada na instancia, mas pode ser mudada dps
+    public Sprite() {
+        this.scale = Data.SPRITE_SCALE;
+    }
 
-	public int getOrdenadas() {
-		return ordenadas;
-	}
+    // getters e setters
+    public void die() {
+        visible = false;
+    }
 
-	public int getAbscissas() {
-		return abscissas;
-	}
+    public boolean isVisible() {
+        return visible;
+    }
 
-	public int getLargura() {
-		return largura;
-	}
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 
-	public int getAltura() {
-		return altura;
-	}
+    public BufferedImage getImg() {
+        return img;
+    }
 
-	public int getScale() {
-		return scale;
-	}
+    public void setImg(BufferedImage img) {
+        this.img = img;
+    }
 
-	public void setScale(int scale) {
-		this.scale = scale;
-	}
-	
-	public int getPosicaoAtualNoX() {
-		posicaoAtualNoX = abscissas;
-		return posicaoAtualNoX;
-	}
+    public int getOrdenadas() {
+        return ordenadas;
+    }
 
-	public void setPosicaoAtualNoX(int posicaoAtualNoX) {
-		this.posicaoAtualNoX = getAbscissas();
-	}
+    public int getAbscissas() {
+        return abscissas;
+    }
 
-	// esses dois são responsáveis por atualizar a posição do player
-	public void setOrdenadas(int ordenadas) {
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
+
+    public void setOrdenadas(int ordenadas) {
         this.ordenadas = ordenadas;
     }
 
     public void setAbscissas(int abscissas) {
         this.abscissas = abscissas;
     }
-    
-    
 
-	// esses dois caras são bem importantas na hora de renderizar o sprite na tela com o tamanho que a gnt vai querer
-	public int getScaledWidth() {
-        return largura * scale;
+    public boolean isDying() {
+        return isDying;
     }
 
-    public int getScaledHeight() {
-        return altura * scale;
+    public void setDying(boolean dying) {
+        this.isDying = dying;
+    }
+
+    // basicamente retorno a imagem com a escala nova se necessesário
+    public BufferedImage getScaledImg() {
+    	// largura é a largura * nv escala
+        int width = img.getWidth() * scale;
+    	// altura é a altura * nv escala
+        int height = img.getHeight() * scale;
+        // buffer que quarda o novo sprite
+        BufferedImage scaledImg = new BufferedImage(width, height, img.getType());
+        Graphics2D g2d = scaledImg.createGraphics();
+        //desenho e jogo fora
+        g2d.drawImage(img, 0, 0, width, height, null);
+        g2d.dispose();
+        
+        // entrego esse cara pra dps ele ser desenhadop no paintComponent
+        return scaledImg;
     }
 }

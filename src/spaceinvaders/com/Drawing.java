@@ -37,6 +37,11 @@ public class Drawing extends JPanel {
         g2d.setColor(Color.BLACK);
        
         g2d.fillRect(0, 0, Data.HEIGHT * Data.SCALE, Data.WIDTH * Data.SCALE);
+        
+        // subscrevendo para pintar de preto antes
+        g2d.setColor(Color.BLACK);
+        g2d.fillRect(0, 0, getWidth(), getHeight());
+
         for (Sprite sprite : sprites) {
             Image image = sprite.getImg();
             if (image != null) {
