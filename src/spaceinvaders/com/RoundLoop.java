@@ -45,7 +45,7 @@ public class RoundLoop {
         initRound();// chamando a classe que inicia os rounds
     }
 
-    public void checkRoundCompletion() { //faz a classe 
+    public void checkRoundCompletion() { //verifica se o roud foi completo
         boolean allAliensDead = true;
         for (Alien alien : aliens) {
             if (alien.isVisible()) {

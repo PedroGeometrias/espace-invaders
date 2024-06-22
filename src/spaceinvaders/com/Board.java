@@ -49,7 +49,7 @@ public class Board extends JPanel {
         setBackground(Color.black);
     }
 
-    // lógica inicial do jogo, como posicionamento dos aliens e instanciamento de objetos
+    // lógica inicial do jogo
     private void gameInit() {
         // array list que receberá cada alien novo
         aliens = new ArrayList<>();
@@ -69,16 +69,12 @@ public class Board extends JPanel {
         // adiciono contexto grafico ao buffer
         bufferGraphics = bufferImage.getGraphics();
     }
-<<<<<<< HEAD
 
     // Método para definir os aliens do round atual
     public void setAliens(List<Alien> aliens) {
         this.aliens = aliens;
     }
 
-=======
-    
->>>>>>> 9778ef68c4682b01f41d68c25f2a792c18fe0bd2
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
