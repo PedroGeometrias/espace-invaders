@@ -56,7 +56,7 @@ public class Board extends JPanel {
 
         // crio o novo player
         player = new Player();
-
+        addKeyListener(new Controles(player));
         // definindo o posi da bala com relacao ao player
         int playerX = player.getAbscissas();
         int playerY = player.getOrdenadas();
@@ -69,12 +69,16 @@ public class Board extends JPanel {
         // adiciono contexto grafico ao buffer
         bufferGraphics = bufferImage.getGraphics();
     }
+<<<<<<< HEAD
 
     // Método para definir os aliens do round atual
     public void setAliens(List<Alien> aliens) {
         this.aliens = aliens;
     }
 
+=======
+    
+>>>>>>> 9778ef68c4682b01f41d68c25f2a792c18fe0bd2
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -110,7 +114,7 @@ public class Board extends JPanel {
                 int x = alien.getAbscissas();
                 int y = alien.getOrdenadas();
                 g.drawImage(img, x, y, this);
-            }
+            } 
             // se ele estiver morto eu deixo ele morto
             if (alien.isDying()) {
                 alien.die();
@@ -140,5 +144,10 @@ public class Board extends JPanel {
             int y = tiro.getOrdenadas();
             g.drawImage(img, x, y, this);
         }
+    }
+    public void updateGame() {
+        player.move(); 
+        tiro.mover();
+        // Update other game logic here, e.g., move aliens, check collisions, etc.
     }
 }

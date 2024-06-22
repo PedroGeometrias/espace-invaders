@@ -26,7 +26,7 @@ public class SpaceInvaders extends JFrame implements Runnable {
 	}
 
 	public static void main(String[] args) { EventQueue.invokeLater(() -> {
-        JFrame ex = new SpaceInvaders();
+        JFrame ex = new Menu();
         ex.setVisible(true);
     });
 	}

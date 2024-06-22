@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.KeyEvent;
 
 public class Player extends Sprite {
+	private int dx;
 // mesma coisa que o alien
     public Player() {
         iniciarSpriteJogador();
@@ -29,25 +30,27 @@ public class Player extends Sprite {
         setVisible(true);
     }
 
-    // setando os controles
+    public void move() {
+        setAbscissas(getAbscissas() + dx);
+    }
+
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
         if (key == KeyEvent.VK_L) {
-            setAbscissas(getAbscissas() + Data.VELOCIDADE_INICIAL);
+            dx = Data.VELOCIDADE_INICIAL;
         }
         if (key == KeyEvent.VK_H) {
-            setAbscissas(getAbscissas() - Data.VELOCIDADE_INICIAL);
+            dx = -Data.VELOCIDADE_INICIAL;
         }
     }
-    public void keyReleased(KeyEvent e) {
+
+public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
 
-        if (key == KeyEvent.VK_L) {
-            setAbscissas(getAbscissas());
-        }
-        if (key == KeyEvent.VK_H) {
-            setAbscissas(getAbscissas());
+        if (key == KeyEvent.VK_L || key == KeyEvent.VK_H) {
+            dx = 0;
         }
     }
 }
+
