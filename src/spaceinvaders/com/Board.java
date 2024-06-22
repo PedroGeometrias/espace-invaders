@@ -13,11 +13,12 @@ import java.util.List;
 
 public class Board extends JPanel {
 
-	// setando alguns objetos
+    // setando alguns objetos
     private Dimension size;
     private List<Alien> aliens;
     private Player player;
     private Tiro tiro;
+    private RoundLoop gameLoop;  // Adicionado campo gameLoop
 
     // setando o double buffer, isso server pra diminuir o flockering quando a gnt for adicionar o game loop
     private Image bufferImage;
@@ -35,11 +36,12 @@ public class Board extends JPanel {
     public void addNotify() {
         super.addNotify();
         gameInit();
+        gameLoop = new RoundLoop(this);  // Inicializando o game loop após o jogo ser inicializado
     }
 
     // atributos basicos da tela do jogo
     public void boardInit() {
-    	// seto o como focavel pra essa telar capturar eventos do teclado
+        // seto o como focavel pra essa telar capturar eventos do teclado
         setFocusable(true);
         size = new Dimension(Data.WIDTH * Data.SCALE, Data.HEIGHT * Data.SCALE);
         
@@ -49,24 +51,10 @@ public class Board extends JPanel {
 
     // lógica inicial do jogo, como posicionamento dos aliens e instanciamento de objetos
     private void gameInit() {
-    	// array list que receberá cada alien novo
+        // array list que receberá cada alien novo
         aliens = new ArrayList<>();
 
-        // definindo as posicoes iniciais
-        int posicaoInicialAliensX = 0;
-        int posicaoInicialAliensY = 0;
-        int espacamentoPX = 42;
-        int espacamentoPY = 32;
-
-        // aliesn são gerados em uma matriz de 4X12
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 12; j++) {
-                var alien = new Alien(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                aliens.add(alien);
-            }
-        }
-
-        // crio o no player
+        // crio o novo player
         player = new Player();
 
         // definindo o posi da bala com relacao ao player
@@ -81,9 +69,10 @@ public class Board extends JPanel {
         // adiciono contexto grafico ao buffer
         bufferGraphics = bufferImage.getGraphics();
     }
-    
-    public void desenharAlien(int roundIndex) {
-    	
+
+    // Método para definir os aliens do round atual
+    public void setAliens(List<Alien> aliens) {
+        this.aliens = aliens;
     }
 
     @Override
@@ -94,10 +83,12 @@ public class Board extends JPanel {
         // desenho na tela
         g.drawImage(bufferImage, 0, 0, this);
         Toolkit.getDefaultToolkit().sync();
+        
+        gameLoop.checkRoundCompletion();  // Verificando a conclusão do round
     }
 
     private void doDrawing(Graphics g) {
-    	// casto g para para graficos 2d, e coloco o resultado no g2d
+        // casto g para para graficos 2d, e coloco o resultado no g2d
         Graphics2D g2d = (Graphics2D) g;
 
         // reseto o buffer pintando de preto
@@ -111,10 +102,9 @@ public class Board extends JPanel {
     }
 
     private void drawAliens(Graphics2D g) {
-    	
-    	// atravesso a array de aliens, pintando cada um deles
+        // atravesso a array de aliens, pintando cada um deles
         for (Alien alien : aliens) {
-        	// se o alien for visivel eu pito
+            // se o alien for visivel eu pinto
             if (alien.isVisible()) {
                 BufferedImage img = alien.getScaledImg();
                 int x = alien.getAbscissas();
