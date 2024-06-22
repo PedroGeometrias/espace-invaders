@@ -49,7 +49,6 @@ public class Menu extends JFrame {
                 JFrame ex = new Cfg();
                 ex.setVisible(true);
 
-
             });
 
             });
