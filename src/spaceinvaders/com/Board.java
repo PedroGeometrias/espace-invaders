@@ -68,7 +68,7 @@ public class Board extends JPanel {
 
         // crio o no player
         player = new Player();
-
+        addKeyListener(new Controles(player));
         // definindo o posi da bala com relacao ao player
         int playerX = player.getAbscissas();
         int playerY = player.getOrdenadas();
@@ -82,10 +82,6 @@ public class Board extends JPanel {
         bufferGraphics = bufferImage.getGraphics();
     }
     
-    public void desenharAlien(int roundIndex) {
-    	
-    }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -120,7 +116,7 @@ public class Board extends JPanel {
                 int x = alien.getAbscissas();
                 int y = alien.getOrdenadas();
                 g.drawImage(img, x, y, this);
-            }
+            } 
             // se ele estiver morto eu deixo ele morto
             if (alien.isDying()) {
                 alien.die();
@@ -150,5 +146,10 @@ public class Board extends JPanel {
             int y = tiro.getOrdenadas();
             g.drawImage(img, x, y, this);
         }
+    }
+    public void updateGame() {
+        player.move(); 
+        tiro.mover();
+        // Update other game logic here, e.g., move aliens, check collisions, etc.
     }
 }

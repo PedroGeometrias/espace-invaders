@@ -3,9 +3,11 @@ package spaceinvaders.com;
 import java.awt.image.BufferedImage;
 
 public class Tiro extends Sprite {
-// msm coisa que o alien, preguica de escrever comentario
+	int dy ;
+// msm coisa que o alien, preguica de escrever comentario	
     public Tiro(int x, int y) {
         initTiro(x, y);
+        dy = y;
     }
 
     private void initTiro(int x, int y) {
@@ -16,5 +18,8 @@ public class Tiro extends Sprite {
         setOrdenadas(y);
         setVisible(true);
     }
-
+    
+    public void mover() {
+    	setOrdenadas(dy--);
+    }
 }
