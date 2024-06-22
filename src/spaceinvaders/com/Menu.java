@@ -1,4 +1,6 @@
 package spaceinvaders.com;
+import java.io.FileNotFoundException;
+
 import javax.swing.*;
 
 public class Menu extends JFrame {
@@ -46,11 +48,23 @@ public class Menu extends JFrame {
             frame.add(configButton);
             configButton.addActionListener(e -> {
                 frame.dispose();
-                JFrame ex = new Cfg();
-                ex.setVisible(true);
-
+                JFrame cfg = new Cfg();
+                cfg.setVisible(true);
             });
-
+            //botao de config
+            JButton placarButton = new JButton("Placar");
+            placarButton.setSize(100, 50);
+            placarButton.setLocation(200, 400);
+            frame.add(placarButton);
+            placarButton.addActionListener(e -> {
+                try {
+                    frame.dispose();
+                    JFrame plc = new Placar();
+                    plc.setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
             });
+        });
     }
 }
