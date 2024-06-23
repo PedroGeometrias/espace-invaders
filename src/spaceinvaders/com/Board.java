@@ -18,11 +18,7 @@ public class Board extends JPanel {
     private List<Alien> aliens;
     private Player player;
     private Tiro tiro;
-<<<<<<< HEAD
     private RoundLoop gameLoop;  // Adicionado campo gameLoop
-=======
-    
->>>>>>> f0b1327 (game loop)
 
     // setando o double buffer, isso server pra diminuir o flockering quando a gnt for adicionar o game loop
     private Image bufferImage;
@@ -92,12 +88,9 @@ public class Board extends JPanel {
     }
 
     private void doDrawing(Graphics g) {
-<<<<<<< HEAD
         // casto g para para graficos 2d, e coloco o resultado no g2d
-=======
     	
     	// casto g para para graficos 2d, e coloco o resultado no g2d
->>>>>>> f0b1327 (game loop)
         Graphics2D g2d = (Graphics2D) g;
 
         // reseto o buffer pintando de preto
