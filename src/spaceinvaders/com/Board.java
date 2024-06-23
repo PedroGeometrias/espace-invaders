@@ -18,7 +18,11 @@ public class Board extends JPanel {
     private List<Alien> aliens;
     private Player player;
     private Tiro tiro;
+<<<<<<< HEAD
     private RoundLoop gameLoop;  // Adicionado campo gameLoop
+=======
+    
+>>>>>>> f0b1327 (game loop)
 
     // setando o double buffer, isso server pra diminuir o flockering quando a gnt for adicionar o game loop
     private Image bufferImage;
@@ -56,7 +60,7 @@ public class Board extends JPanel {
 
         // crio o novo player
         player = new Player();
-        addKeyListener(new Controles(player));
+        addKeyListener(new Controles(player, this));
         // definindo o posi da bala com relacao ao player
         int playerX = player.getAbscissas();
         int playerY = player.getOrdenadas();
@@ -88,7 +92,12 @@ public class Board extends JPanel {
     }
 
     private void doDrawing(Graphics g) {
+<<<<<<< HEAD
         // casto g para para graficos 2d, e coloco o resultado no g2d
+=======
+    	
+    	// casto g para para graficos 2d, e coloco o resultado no g2d
+>>>>>>> f0b1327 (game loop)
         Graphics2D g2d = (Graphics2D) g;
 
         // reseto o buffer pintando de preto
@@ -134,16 +143,19 @@ public class Board extends JPanel {
 
     // mesma coisa que o player, mas a bala n pode estar morta
     private void drawShot(Graphics2D g) {
-        if (tiro.isVisible()) {
-            BufferedImage img = tiro.getScaledImg();
+        if (tiro.isVisible() && player.getPressionando()) {
+        	BufferedImage img = tiro.getScaledImg();  
             int x = tiro.getAbscissas();
             int y = tiro.getOrdenadas();
             g.drawImage(img, x, y, this);
         }
     }
+    
+    
     public void updateGame() {
-        player.move(); 
+        player.move();
+        if(player.getPressionando()) {
         tiro.mover();
-        // Update other game logic here, e.g., move aliens, check collisions, etc.
+        }
     }
 }

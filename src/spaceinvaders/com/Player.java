@@ -5,6 +5,9 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Sprite {
 	private int dx;
+	
+	private boolean pressionando;
+
 // mesma coisa que o alien
     public Player() {
         iniciarSpriteJogador();
@@ -43,8 +46,16 @@ public class Player extends Sprite {
         if (key == KeyEvent.VK_H) {
             dx = -Data.VELOCIDADE_INICIAL;
         }
+        if(key == KeyEvent.VK_SPACE) {
+        	pressionando = true;
+        } else {
+        	pressionando = false;
+        }
     }
 
+    public boolean getPressionando(){
+    return this.pressionando;	
+    }
 public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
 

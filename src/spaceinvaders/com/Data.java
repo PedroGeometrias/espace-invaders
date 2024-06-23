@@ -18,10 +18,10 @@ public interface Data {
     final int QUANTIDADE_MOEDAS_INICIAL = 0;
     final int VELOCIDADE_TIROS_SEG_INICIAL = 8;
     final int QUANTIDADE_MOEDAS_DROP_ALIEN = 0;
-    int NUMBER_OF_ALIENS_TO_DESTROY = 24;
+    final int NUMBER_OF_ALIENS_TO_DESTROY = 24;
 
     // talvez use no futuro
-    int GO_DOWN = 15;
-    int CHANCE = 5;
-    int DELAY = 17;
+    final int GO_DOWN = 15;
+    final int CHANCE = 5;
+    final int DELAY = 17;
 }
