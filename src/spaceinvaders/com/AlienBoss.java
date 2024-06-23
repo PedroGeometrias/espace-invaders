@@ -1,21 +1,16 @@
 package spaceinvaders.com;
-
 import java.awt.image.BufferedImage;
 
+public class AlienBoss extends Alien {
 
-import  java.awt.image.BufferedImage;
-
-
-public class AlienVermelho extends Alien{
-
-    public AlienVermelho(int x, int y) {
+    public AlienBoss(int x, int y) {
         super(x, y);
-        //TODO Auto-generated constructor stub
+       
     }
 
     @Override
     public void initAlien(int x, int y) {
-        BufferedImage alienSprite = Data.spriteSheet.recortarSprite(0, 32, 16, 16);
+        BufferedImage alienSprite = Data.spriteSheet.recortarSprite(0, 16, 16, 16);
         
         // seto o sprite desse alien como o recorte
         setImg(alienSprite);
@@ -29,6 +24,7 @@ public class AlienVermelho extends Alien{
         
         // sempre lembrar de setar a visibilidade no momento depois da criacao como true, puta dor de cabeça esse ngc
         setVisible(true);
+        
     }
     
 }

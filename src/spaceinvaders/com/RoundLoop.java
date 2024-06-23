@@ -29,11 +29,21 @@ public class RoundLoop {
                     alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
                 } else if (round == 2) {
                     alien = new AlienVermelho(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                } else {
-                   
+                } else if (round == 3) {
+                    alien = new AlienAzul(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                } else if (round == 4) {
+                    alien = new AlienRoxo(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                } else if (round == 5) {
+                    alien = new AlienBoss(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                }
+                else{
+                    
                     alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
                 }
-                aliens.add(alien);//adiciona no Array
+
+                if (alien != null) {
+                    aliens.add(alien);
+                }
             }
         }
 
