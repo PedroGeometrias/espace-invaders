@@ -4,17 +4,22 @@ import java.awt.image.BufferedImage;
 import java.awt.event.KeyEvent;
 
 public class Player extends Sprite {
-	private int dx;
-	
-	private boolean pressionando;
+    private int dx;
+    private SpriteSheet spriteSheet;
+    private int velocidadeNave;
+    private int velocidadeTiro;
+    private boolean pressionando;
 
-// mesma coisa que o alien
+    // mesma coisa que o alien
     public Player() {
+        this.spriteSheet = Data.spriteSheet;
+        this.velocidadeNave = Data.VELOCIDADE_INICIAL;
+        this.setVelocidadeTiro(Data.VELOCIDADE_TIROS_SEG_INICIAL);
         iniciarSpriteJogador();
     }
 
     public void iniciarSpriteJogador() {
-        BufferedImage naveSprite = Data.spriteSheet.recortarSprite(0, 0, 16, 16);
+        BufferedImage naveSprite = spriteSheet.recortarSprite(0, 0, 16, 16);
         setImg(naveSprite);
         setScale(2); 
         // unica diferencia é que a posição da nave tem de ser na parte de baixo e no meio
@@ -26,42 +31,61 @@ public class Player extends Sprite {
         // metade do x
         int x = (screenWidth - spriteWidth) / 2;
         // parte mais em baixo
-        int y = screenHeight - (spriteHeight * Data.SPRITE_SCALE) - 40;
+        int y = screenHeight - (spriteHeight * getScale()) - 40;
 
         setAbscissas(x);
         setOrdenadas(y);
         setVisible(true);
     }
 
+    // Atualizo meu movimento com base na velocidade e checo os limites da tela
     public void move() {
-        setAbscissas(getAbscissas() + dx);
+    	// velocidade de mov
+        int newX = getAbscissas() + dx;
+        
+        // limites
+        int screenWidth = Data.WIDTH * Data.SCALE;
+        int spriteWidth = getImg().getWidth() * getScale();
+
+        // Verifica os limites da tela
+        if (newX >= 0 && newX + spriteWidth <= screenWidth) {
+            setAbscissas(newX);
+        } else {
+            // Se atingir o limite, para o movimento
+            dx = 0;
+        }
     }
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-
         if (key == KeyEvent.VK_L) {
-            dx = Data.VELOCIDADE_INICIAL;
+            dx = velocidadeNave; 
         }
         if (key == KeyEvent.VK_H) {
-            dx = -Data.VELOCIDADE_INICIAL;
-        }
-        if(key == KeyEvent.VK_SPACE) {
-        	pressionando = true;
-        } else {
-        	pressionando = false;
+            dx = -velocidadeNave;
         }
     }
 
-    public boolean getPressionando(){
-    return this.pressionando;	
-    }
-public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
-
         if (key == KeyEvent.VK_L || key == KeyEvent.VK_H) {
             dx = 0;
         }
     }
-}
 
+    // eu crio um tiro novo la no timer
+    public Tiro shoot() {
+        int playerX = getAbscissas();
+        int playerY = getOrdenadas();
+        int spriteWidth = getImg().getWidth();
+        return new Tiro(playerX + (spriteWidth / 2), playerY - 20);
+    }
+
+    public int getVelocidadeTiro() {
+        return velocidadeTiro;
+    }
+
+    public void setVelocidadeTiro(int velocidadeTiro) {
+        this.velocidadeTiro = velocidadeTiro;
+    }
+}

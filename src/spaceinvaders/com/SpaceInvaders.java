@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 
 public class SpaceInvaders extends JFrame implements Runnable {
 	private Board board;
-	    private Thread gameThread;
-	    private boolean isRunning;
+	private Thread gameThread;
+	private boolean isRunning;
 	public SpaceInvaders() {
 		initGame();
 	}

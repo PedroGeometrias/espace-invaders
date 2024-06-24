@@ -1,6 +1,7 @@
 package spaceinvaders.com;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Sprite {
@@ -18,7 +19,6 @@ public class Sprite {
 
     // escala inicial é setada na instancia, mas pode ser mudada dps
     public Sprite() {
-        this.scale = Data.SPRITE_SCALE;
     }
 
     // getters e setters
@@ -89,5 +89,22 @@ public class Sprite {
         
         // entrego esse cara pra dps ele ser desenhadop no paintComponent
         return scaledImg;
+    }
+    
+    // metodo da colisao, eu retorno verdadeiro se o sprite do parametro (alien ou player) colidir com o sprite do tiro
+    public boolean colidir(Sprite sprite) {
+    	// espaco ocupado pela bala
+        int ladoEsquerdo = this.abscissas;
+        int ladoDireito = this.abscissas + this.img.getWidth() * this.scale;
+        int topo = this.ordenadas;
+        int parteMaiEmbaixo = this.ordenadas + this.img.getHeight() * this.scale;
+
+        // espaco ocupado pelo alien
+        int esquerdoSprite = sprite.abscissas;
+        int direitaSprite = sprite.abscissas + sprite.img.getWidth() * sprite.scale;
+        int topoSprite = sprite.ordenadas;
+        int parteMaisEmbaixoSprite = sprite.ordenadas + sprite.img.getHeight() * sprite.scale;
+
+        return ladoDireito > esquerdoSprite && ladoEsquerdo < direitaSprite && parteMaiEmbaixo > topoSprite && topo < parteMaisEmbaixoSprite;
     }
 }
