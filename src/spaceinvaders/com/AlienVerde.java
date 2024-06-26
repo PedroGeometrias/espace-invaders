@@ -7,6 +7,8 @@ public class AlienVerde extends  Alien{
     public AlienVerde(int x, int y) {
         super(x, y);
         //TODO Auto-generated constructor stub
+        setVida(20);
+        setDano(5);
     }
 
     @Override

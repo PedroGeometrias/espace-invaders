@@ -4,18 +4,24 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class RoundLoop {
-	
-	
+	// criando objetos Board, que seram usados nessa classe
     private Board board;
+    
+    // contador de rounds
     private int round;
+    
+    // lista de aliens
     private List<Alien> aliens;
 
     public RoundLoop(Board board) {
         this.board = board;
-        this.round = 1; // começar do round 1
+        
+        // sempre os rounds comecam no 1
+        this.round = 5; 
         initRound();
     }
 
+    // iniciador de roundes
     public void initRound() {
         aliens = new ArrayList<>();
         int posicaoInicialAliensX = 0;
@@ -23,41 +29,48 @@ public class RoundLoop {
         int espacamentoPX = 42;
         int espacamentoPY = 32;
 
-        //faz a logica dos rounds
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 12; j++) {
-                Alien alien;
-                if (round == 1) {
-                    alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                } else if (round == 2) {
-                    alien = new AlienVermelho(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                } else if (round == 3) {
-                    alien = new AlienAzul(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                } else if (round == 4) {
-                    alien = new AlienRoxo(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                } else if (round == 5) {
-                    alien = new AlienBoss(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                }
-                else{
-                    
-                    alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
-                }
-
-                if (alien != null) {
+        // se o round for igual a 5, ta na hora do boss 
+        if (round == 5) {
+            // spawno o boss ( pego a largura vezes o scale, divido por 2 que me da a metade e somo pela largura do sprite
+        	// do boss, que é 80)
+            Alien boss = new AlienBoss((Data.WIDTH * Data.SCALE) / 2  - 80, 0);;
+            aliens.add(boss);
+        } else {
+        	// caso o round n seja o quinto, eu spawno os aliens normais
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 12; j++) {
+                    Alien alien;
+                    switch (round % 5) {
+                        case 1:
+                            alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                            break;
+                        case 2:
+                            alien = new AlienVermelho(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                            break;
+                        case 3:
+                            alien = new AlienAzul(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                            break;
+                        case 4:
+                            alien = new AlienRoxo(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                            break;
+                        default:
+                            alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
+                            break;
+                    }
                     aliens.add(alien);
                 }
             }
         }
 
-        board.setAliens(aliens);//defini os aliens do round atual
-     }
-
-     public void nextRound() { //faz o proximo round 
-        round++;
-        initRound();// chamando a classe que inicia os rounds
+        board.setAliens(aliens); 
     }
 
-    public void checkRoundCompletion() { //verifica se o roud foi completo
+    public void nextRound() {
+        round++;
+        initRound(); 
+    }
+
+    public void checkRoundCompletion() { 
         boolean allAliensDead = true;
         for (Alien alien : aliens) {
             if (alien.isVisible()) {
@@ -67,7 +80,8 @@ public class RoundLoop {
         }
 
         if (allAliensDead) {
+        	board.clearBulletsOnRoundCompletion();
             nextRound();
         }
     }
-  }
+}

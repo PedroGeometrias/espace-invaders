@@ -6,14 +6,14 @@ public interface Data {
     // atributos da tela
     final int WIDTH = 100;
     final int HEIGHT = 100;
-    final int SCALE = 7; // Fator de escala para a tela
+    final int SCALE = 5; // Fator de escala para a tela
 
     // atributos do jogador e alien
     final int VELOCIDADE_INICIAL = 5;
-    final int DANO_INICIAL = 10;
-    final int VIDA_INICIAL = 100;
+    final int DANO_INICIAL = 50;
+    final int VIDA_INICIAL = 50;
     final int QUANTIDADE_MOEDAS_INICIAL = 0;
-    final int VELOCIDADE_TIROS_SEG_INICIAL = 100;
+    final int VELOCIDADE_TIROS_SEG_INICIAL =5;
     final int QUANTIDADE_MOEDAS_DROP_ALIEN = 0;
     final int NUMBER_OF_ALIENS_TO_DESTROY = 24;
 

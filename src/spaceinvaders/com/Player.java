@@ -8,13 +8,13 @@ public class Player extends Sprite {
     private SpriteSheet spriteSheet;
     private int velocidadeNave;
     private int velocidadeTiro;
-    private boolean pressionando;
+    private int vida;
 
-    // mesma coisa que o alien
     public Player() {
         this.spriteSheet = Data.spriteSheet;
         this.velocidadeNave = Data.VELOCIDADE_INICIAL;
         this.setVelocidadeTiro(Data.VELOCIDADE_TIROS_SEG_INICIAL);
+        this.vida = 100; 
         iniciarSpriteJogador();
     }
 
@@ -22,36 +22,24 @@ public class Player extends Sprite {
         BufferedImage naveSprite = spriteSheet.recortarSprite(0, 0, 16, 16);
         setImg(naveSprite);
         setScale(2); 
-        // unica diferencia é que a posição da nave tem de ser na parte de baixo e no meio
-        // aqui eu seto isso
         int screenWidth = Data.WIDTH * Data.SCALE;
         int screenHeight = Data.HEIGHT * Data.SCALE;
         int spriteWidth = naveSprite.getWidth();
         int spriteHeight = naveSprite.getHeight();
-        // metade do x
-        int x = (screenWidth - spriteWidth) / 2;
-        // parte mais em baixo
+        int x = (screenWidth - spriteWidth * getScale()) / 2;
         int y = screenHeight - (spriteHeight * getScale()) - 40;
-
         setAbscissas(x);
         setOrdenadas(y);
         setVisible(true);
     }
 
-    // Atualizo meu movimento com base na velocidade e checo os limites da tela
     public void move() {
-    	// velocidade de mov
         int newX = getAbscissas() + dx;
-        
-        // limites
         int screenWidth = Data.WIDTH * Data.SCALE;
         int spriteWidth = getImg().getWidth() * getScale();
-
-        // Verifica os limites da tela
         if (newX >= 0 && newX + spriteWidth <= screenWidth) {
             setAbscissas(newX);
         } else {
-            // Se atingir o limite, para o movimento
             dx = 0;
         }
     }
@@ -73,11 +61,10 @@ public class Player extends Sprite {
         }
     }
 
-    // eu crio um tiro novo la no timer
     public Tiro shoot() {
         int playerX = getAbscissas();
         int playerY = getOrdenadas();
-        int spriteWidth = getImg().getWidth();
+        int spriteWidth = getImg().getWidth() * getScale();
         return new Tiro(playerX + (spriteWidth / 2), playerY - 20);
     }
 
@@ -87,5 +74,21 @@ public class Player extends Sprite {
 
     public void setVelocidadeTiro(int velocidadeTiro) {
         this.velocidadeTiro = velocidadeTiro;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public void receberDano(int dano) {
+        this.vida -= dano;
+        if (this.vida <= 0) {
+            setVisible(false);
+            // Lógica para o fim do jogo ou reinício
+        }
     }
 }

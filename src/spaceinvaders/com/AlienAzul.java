@@ -5,7 +5,8 @@ public class AlienAzul extends Alien {
 
     public AlienAzul(int x, int y) {
         super(x, y);
-        
+        setVida(50);
+        setDano(20);
     }
 
     @Override

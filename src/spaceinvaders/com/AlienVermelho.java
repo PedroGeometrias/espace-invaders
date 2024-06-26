@@ -11,6 +11,8 @@ public class AlienVermelho extends Alien{
     public AlienVermelho(int x, int y) {
         super(x, y);
         //TODO Auto-generated constructor stub
+ setVida(40);
+        setDano(15);
     }
 
     @Override
