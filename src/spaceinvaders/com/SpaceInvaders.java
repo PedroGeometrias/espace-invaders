@@ -76,7 +76,7 @@ public class SpaceInvaders extends JFrame implements Runnable {
             board.repaint();
             board.updateGame();
             try {
-                Thread.sleep(16); // Force 60 FPS
+                Thread.sleep(16);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
