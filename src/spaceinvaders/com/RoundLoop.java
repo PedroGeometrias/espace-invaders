@@ -36,7 +36,7 @@ public class RoundLoop {
         	this.round = load.loadRound();
         }
         // se o round for igual a 5, ta na hora do boss 
-        if (round == 5) {
+        if (round % 5 == 0) {
             // spawno o boss ( pego a largura vezes o scale, divido por 2 que me da a metade e somo pela largura do sprite
         	// do boss, que é 80)
             Alien boss = new AlienBoss((Data.WIDTH * Data.SCALE) / 2  - 80, 0);;
