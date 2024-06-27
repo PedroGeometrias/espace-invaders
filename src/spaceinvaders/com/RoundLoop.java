@@ -32,7 +32,9 @@ public class RoundLoop {
         int posicaoInicialAliensY = 0;
         int espacamentoPX = 42;
         int espacamentoPY = 32;
-
+        if((load.loadRound() > 0) && load.loadRound() != -1) {
+        	this.round = load.loadRound();
+        }
         // se o round for igual a 5, ta na hora do boss 
         if (round == 5) {
             // spawno o boss ( pego a largura vezes o scale, divido por 2 que me da a metade e somo pela largura do sprite
@@ -44,7 +46,7 @@ public class RoundLoop {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 12; j++) {
                     Alien alien;
-                    if(!(load.loadRound() <= 0)) {
+                    
                     switch (round % 5) {
                         case 1:
                             alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
@@ -64,10 +66,7 @@ public class RoundLoop {
                     }
                     
                     aliens.add(alien);
-                    }
-                    else {
-                    	round = load.loadRound();
-                    }
+                  
                 }
             }
         }

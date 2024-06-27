@@ -13,7 +13,7 @@ public interface Data {
     final int DANO_INICIAL = 50;
     final int VIDA_INICIAL = 50;
     final int QUANTIDADE_MOEDAS_INICIAL = 0;
-    final int VELOCIDADE_TIROS_SEG_INICIAL =5;
+    final int VELOCIDADE_TIROS_SEG_INICIAL =50;
     final int QUANTIDADE_MOEDAS_DROP_ALIEN = 0;
     final int NUMBER_OF_ALIENS_TO_DESTROY = 24;
 
