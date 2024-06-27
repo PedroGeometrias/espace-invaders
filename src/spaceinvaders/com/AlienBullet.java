@@ -14,11 +14,16 @@ public class AlienBullet extends Bullet {
     }
 
     private void initBullet(int x, int y) {
+    	
         BufferedImage bulletSprite = new BufferedImage(5, 10, BufferedImage.TYPE_INT_ARGB);
+        
         Graphics g = bulletSprite.getGraphics();
-        g.setColor(Color.MAGENTA);
+        
+        g.setColor(Color.GREEN);
         g.fillRect(0, 0, 5, 10);
+        
         setImg(bulletSprite);
+        
         setScale(1);
     }
 

@@ -55,7 +55,7 @@ public class Menu extends JPanel implements KeyListener {
         for (JButton button : buttons) {
             add(button);
         }
-
+        
         currentSelection = 0;
         // seto ja o primeiro botao pra cor certa de selecao, se n quando o app for aberto pela primeira vez a cor seria preta
         buttons[currentSelection].setBackground(Color.green);
@@ -94,7 +94,6 @@ public class Menu extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // No implementation needed
     }
 
     @Override
@@ -113,7 +112,6 @@ public class Menu extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // No implementation needed
     }
 
     // logica do que os botoes fazem

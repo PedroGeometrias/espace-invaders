@@ -1,9 +1,13 @@
 package spaceinvaders.com;
 
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class RoundLoop {
+	
+	RoundManager load;
 	// criando objetos Board, que seram usados nessa classe
     private Board board;
     
@@ -15,14 +19,14 @@ public class RoundLoop {
 
     public RoundLoop(Board board) {
         this.board = board;
-        
+        this.load = new RoundManager();
         // sempre os rounds comecam no 1
-        this.round = 5; 
+        this.round = 1; 
         initRound();
     }
 
     // iniciador de roundes
-    public void initRound() {
+	public void initRound() {
         aliens = new ArrayList<>();
         int posicaoInicialAliensX = 0;
         int posicaoInicialAliensY = 0;
@@ -40,6 +44,7 @@ public class RoundLoop {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 12; j++) {
                     Alien alien;
+                    if(!(load.loadRound() <= 0)) {
                     switch (round % 5) {
                         case 1:
                             alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
@@ -57,7 +62,12 @@ public class RoundLoop {
                             alien = new AlienVerde(posicaoInicialAliensX + espacamentoPX * j, posicaoInicialAliensY + espacamentoPY * i);
                             break;
                     }
+                    
                     aliens.add(alien);
+                    }
+                    else {
+                    	round = load.loadRound();
+                    }
                 }
             }
         }
@@ -67,6 +77,7 @@ public class RoundLoop {
 
     public void nextRound() {
         round++;
+        load.saveRound(round);
         initRound(); 
     }
 

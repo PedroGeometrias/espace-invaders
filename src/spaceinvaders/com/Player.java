@@ -88,7 +88,6 @@ public class Player extends Sprite {
         this.vida -= dano;
         if (this.vida <= 0) {
             setVisible(false);
-            // Lógica para o fim do jogo ou reinício
         }
     }
 }

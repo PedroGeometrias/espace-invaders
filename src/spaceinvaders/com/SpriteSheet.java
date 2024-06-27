@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class SpriteSheet extends JPanel {
+public class SpriteSheet{
     private BufferedImage img;
 
     public SpriteSheet(String path) {

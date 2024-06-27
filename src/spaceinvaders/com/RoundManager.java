@@ -10,7 +10,7 @@ public class RoundManager {
     private static final String FILE_PATH = "round.txt";
 
     // Salva o valor do round no arquivo
-    public static void saveRound(int round) {
+    public void saveRound(int round) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
             writer.write(String.valueOf(round));
         } catch (IOException e) {
@@ -19,7 +19,7 @@ public class RoundManager {
     }
 
     // Lê o valor do round do arquivo
-    public static int loadRound() {
+    public int loadRound() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line = reader.readLine();
             if (line != null) {
@@ -28,6 +28,6 @@ public class RoundManager {
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();
         }
-        return 1; // Valor padrão caso o arquivo não exista ou ocorra um erro
+        return 1;
     }
 }

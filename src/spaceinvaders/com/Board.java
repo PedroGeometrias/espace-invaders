@@ -56,17 +56,11 @@ public class Board extends JPanel {
 
     public Board() {
         boardInit();
-        board = this;
     }
 
-    public static Board getInstance() {
-        return board;
-    }
-
-    
     // esse metodo é chamado automaticamente quando o componente (Board) e adicionado la no JFrame setado no space invaders
     // tem um monte de gnt na internete falando que n é bomo usar esse metodo mas eu n sei como fazer de outro jeito
-    @Override
+   @Override
     public void addNotify() {
     	System.out.printf("board foi adicionado corretamente\n");
         super.addNotify();
